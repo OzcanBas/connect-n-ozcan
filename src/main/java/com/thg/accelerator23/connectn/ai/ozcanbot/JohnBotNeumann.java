@@ -25,6 +25,7 @@ public class JohnBotNeumann extends Player {
 
       if (!board.hasCounterAtPosition(new Position(position, board.getConfig().getHeight() - 1))) {
         validMove = true;
+        selectedColumn = position;
       }
     }
 
