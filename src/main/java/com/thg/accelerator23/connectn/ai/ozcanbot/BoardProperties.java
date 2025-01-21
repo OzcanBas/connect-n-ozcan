@@ -31,7 +31,7 @@ public class BoardProperties {
     private Counter[][] deepCopyBoard(Counter[][] original) {
         int width = original.length;
         int height = original[0].length;
-        Counter[][] copy = new Counter[height][width];
+        Counter[][] copy = new Counter[width][height];
         for (int i = 0; i < width; i++) {
             System.arraycopy(original[i], 0, copy[i], 0, height);
         }
