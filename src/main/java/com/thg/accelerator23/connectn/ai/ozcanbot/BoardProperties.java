@@ -17,7 +17,6 @@ public class BoardProperties {
         this.isOpponentsTurn = isOpponentsTurn;
     }
 
-
     // getters
     public Counter[][] getBoard() {
         return deepCopyBoard(this.board);
@@ -44,10 +43,9 @@ public class BoardProperties {
         return this.board[column][height - 1] == null; // Check if the top row is empty
     }
 
-
     public int getMinFreeY(int column, int height) {
         for (int y = 0; y < height - 1 ; ++y) { // number of rows
-                if (this.board[y][column] == null) {
+                if (this.board[column][y] == null) {
                     return y;
                 }
         }

@@ -19,9 +19,7 @@ public class JohnBotNeumann extends Player {
   @Override
   public int makeMove(Board board) {
     //TODO: some crazy analysis
-    //TODO: make sure said analysis uses less than 2G of heap and returns within 10 seconds on whichever machine is running it
-
-    System.out.println(Arrays.deepToString(board.getCounterPlacements()));
+    //TODO: make sure said analysis uses less than 2GB of heap and returns within 10 seconds on whichever machine is running it
 
     BoardProperties copiedBoard = new BoardProperties(board.getCounterPlacements(), true);
     boolean validMove = false;
@@ -35,10 +33,6 @@ public class JohnBotNeumann extends Player {
         selectedColumn = column;
       }
     }
-
-    System.out.println("hey there this is supposed to be a copy of the board");
-    System.out.println(Arrays.deepToString(copiedBoard.getBoard()));
-    System.out.println(copiedBoard.initializePositionScores(copiedBoard.getBoard()));
     return selectedColumn;
   }
 }
