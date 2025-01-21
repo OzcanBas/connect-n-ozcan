@@ -5,6 +5,8 @@ import com.thehutgroup.accelerator.connectn.player.Counter;
 import com.thehutgroup.accelerator.connectn.player.Player;
 import com.thehutgroup.accelerator.connectn.player.Counter;
 
+import java.util.Arrays;
+
 // these are my classes
 
 
@@ -35,8 +37,9 @@ public class JohnBotNeumann extends Player {
     }
 
     System.out.println("hey there this is supposed to be a copy of the board");
-    System.out.println(copiedBoard);
-
+    System.out.println(Arrays.deepToString(copiedBoard.getBoard()));
+    System.out.println(copiedBoard.initializePositionScores(copiedBoard.getBoard()));
+    System.out.println(copiedBoard.initializePositionScores(copiedBoard.getBoard()));
     return selectedColumn;
   }
 }
