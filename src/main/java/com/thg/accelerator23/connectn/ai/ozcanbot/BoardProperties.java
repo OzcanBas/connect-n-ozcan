@@ -29,8 +29,8 @@ public class BoardProperties {
 
     // deep copy the board to avoid modifying the original board
     private Counter[][] deepCopyBoard(Counter[][] original) {
-        int width = original.length;
-        int height = original[0].length;
+        int width = original[0].length;
+        int height = original.length;
         Counter[][] copy = new Counter[width][height];
         for (int i = 0; i < width; i++) {
             System.arraycopy(original[i], 0, copy[i], 0, height);
@@ -69,6 +69,7 @@ public class BoardProperties {
         }
         return positionScores;
     }
+
 
 }
 
