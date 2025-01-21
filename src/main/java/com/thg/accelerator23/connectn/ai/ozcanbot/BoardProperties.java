@@ -29,9 +29,9 @@ public class BoardProperties {
 
     // deep copy the board to avoid modifying the original board
     private Counter[][] deepCopyBoard(Counter[][] original) {
-        int width = original[0].length;
-        int height = original.length;
-        Counter[][] copy = new Counter[width][height];
+        int width = original.length;
+        int height = original[0].length;
+        Counter[][] copy = new Counter[height][width];
         for (int i = 0; i < width; i++) {
             System.arraycopy(original[i], 0, copy[i], 0, height);
         }
@@ -45,8 +45,8 @@ public class BoardProperties {
     }
 
 
-    public int getMinFreeY(int column) {
-        for (int y = this.board.length - 1; y >= 0 ; --y) { // number of rows
+    public int getMinFreeY(int column, int height) {
+        for (int y = 0; y < height - 1 ; ++y) { // number of rows
                 if (this.board[y][column] == null) {
                     return y;
                 }
@@ -61,10 +61,10 @@ public class BoardProperties {
         int height = board[0].length;
 
         // Traverse the board
-        for (int x = 0; x < this.board[0].length ; ++x) { // go through each column
-            int availableY = getMinFreeY(x);
+        for (int x = 0; x < width - 1 ; ++x) { // go through each column
+            int availableY = getMinFreeY(x, height);
             if (availableY != -1) {
-                positionScores.put(new Position(x, availableY), 0); // Initialize with a default score
+                positionScores.put(new Position(x, availableY), x*20); // Initialize with a default score
             }
         }
         return positionScores;
