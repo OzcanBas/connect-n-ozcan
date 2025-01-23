@@ -1,95 +1,43 @@
 package com.thg.accelerator23.connectn.ai.ozcanbot;
 
-import com.thehutgroup.accelerator.connectn.player.Position;
 import com.thehutgroup.accelerator.connectn.player.Counter;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
+import com.thehutgroup.accelerator.connectn.player.Position;
 
 public class NewBoard {
-
-    // make a copy of the current board instance
     private final Counter[][] board;
-    private final int width;
-    private final int height;
-    private final Position position;
-    private final Counter counter;
 
-    public NewBoard(Counter[][] board, Position position, Counter counter) {
+    // Primary constructor: Creates a NewBoard from an existing board.
+    public NewBoard(Counter[][] board) {
         this.board = deepCopyBoard(board);
-        this.width = board.length;
-        this.height = board[0].length;
-        this.position = position;
-        this.counter = counter;
     }
 
-    // getters
+    // Overloaded constructor: Creates a NewBoard with a new counter added at a specific position.
+    public NewBoard(Counter[][] board, Position position, Counter counter) {
+        this.board = deepCopyBoardWithCounter(board, position, counter);
+    }
+
     public Counter[][] getBoard() {
         return deepCopyBoard(this.board);
     }
 
-    public int getHeight() {
-        return height;
-    }
-
-    public int getWidth(){
-        return width;
-    }
-
-
-    // now for the actual class methods
-
-    // deep copy the board to avoid modifying the original board
+    // Helper method to deep copy the board.
     private Counter[][] deepCopyBoard(Counter[][] original) {
-        // copy the old board
-        Counter[][] copy = new Counter[this.width][this.height];
-        for (int i = 0; i < this.width; i++) {
-            System.arraycopy(original[i], 0, copy[i], 0, this.height);
+        Counter[][] copy = new Counter[original.length][original[0].length];
+        for (int i = 0; i < original.length; i++) {
+            System.arraycopy(original[i], 0, copy[i], 0, original[i].length);
         }
-
-        // also add the new piece
-        if (position != null) {
-            copy[this.position.getX()][this.position.getY()] = counter;
-        }
-
         return copy;
     }
 
-    public int getMinFreeY(int column, int height) {
-        for (int y = 0; y < height - 1 ; ++y) { // number of rows
-                if (this.board[column][y] == null) {
-                    return y;
-                }
+    // Helper method to deep copy the board and add a counter at a specific position.
+    private Counter[][] deepCopyBoardWithCounter(Counter[][] original, Position position, Counter counter) {
+        Counter[][] copy = deepCopyBoard(original);
+        if (position != null) {
+            int x = position.getX();
+            int y = position.getY();
+            copy[x][y] = counter;
         }
-        return -1;
-    }
-
-
-    // make an array of all the valid positions on the board:
-    public ArrayList<Position> getValidPositions() {
-        ArrayList<Position> validPositions = new ArrayList<>();
-
-        for (int x = 0; x < width - 1 ; ++x) { // go through each column
-            int availableY = getMinFreeY(x, height);
-            if (availableY != -1) {
-                validPositions.add(new Position(x, availableY));
-            }
-        }
-        return validPositions;
-    }
-
-    // Use function above to make a hashmap of all valid positions with key=position value=positionScore
-    public Map<Position, Integer> initializePositionScores() {
-        Map<Position, Integer> positionScores = new HashMap<>();
-
-        ArrayList<Position> validPositions = getValidPositions();
-
-        for (Position position : validPositions) {
-            positionScores.put(position, position.getX() * 20); // Initialize with a default score
-        }
-
-        return positionScores;
+        return copy;
     }
 }
 

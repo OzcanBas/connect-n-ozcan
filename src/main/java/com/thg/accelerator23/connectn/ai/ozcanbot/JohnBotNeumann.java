@@ -36,10 +36,10 @@ public class JohnBotNeumann extends Player {
     // return selectedColumn
     // Convert the board into a NewBoard object
 
-    NewBoard copiedBoard = new NewBoard(board.getCounterPlacements(), null, null);
+    NewBoard copiedBoard = new NewBoard(board.getCounterPlacements());
 
     // Create an instance of Minimax with desired depth
-    Minimax minimax = new Minimax(5); // Adjust depth based on performance constraints
+    Minimax minimax = new Minimax(20); // Adjust depth based on performance constraints
 
     // Get the best move
     Position bestMove = minimax.getBestMove(copiedBoard, myCounter);

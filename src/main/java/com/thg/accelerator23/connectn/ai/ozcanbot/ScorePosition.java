@@ -3,21 +3,21 @@ package com.thg.accelerator23.connectn.ai.ozcanbot;
 import com.thehutgroup.accelerator.connectn.player.Position;
 import com.thehutgroup.accelerator.connectn.player.Counter;
 
+import java.util.ArrayList;
+
 // Given a board state and an open position this class will evaluate the score of the open position
 public class ScorePosition {
     private final Position position;
     private final int height;
     private final int width;
     private final NewBoard currentBoard;
-    private final Counter currentPlayer;
 
     // constructor
-    public ScorePosition(NewBoard board, Position position, Counter currentPlayer) {
+    public ScorePosition(NewBoard board, Position position) {
         this.currentBoard = board;
-        this.height = board.getHeight();
-        this.width = board.getWidth();
+        this.height = board.getBoard()[0].length;
+        this.width = board.getBoard().length;
         this.position = position;
-        this.currentPlayer = currentPlayer;
     }
 
 
@@ -137,43 +137,4 @@ public class ScorePosition {
         return totalScore;
     }
 
-
-    // this function checks all necessary squares to see if a given player has won
-    public boolean checkWinningMove(Counter[][] window, Counter currentPlayer) {
-        // check vertically
-        for (int i = 0; i < width; i++) {
-            for (int j = 0; j < height - 3; j++) {
-                if (currentBoard.getBoard()[i][j] == currentPlayer && currentBoard.getBoard()[i][j+1] == currentPlayer && currentBoard.getBoard()[i][j+2] == currentPlayer && currentBoard.getBoard()[i][j+3] == currentPlayer) { return true; }
-            }
-        }
-
-        // check horizontally
-        for (int i = 0; i < width - 3; i++) {
-            for (int j = 0; j < height; j++) {
-                if (currentBoard.getBoard()[i][j] == currentPlayer && currentBoard.getBoard()[i+1][j] == currentPlayer && currentBoard.getBoard()[i+2][j] == currentPlayer && currentBoard.getBoard()[i+3][j] == currentPlayer) { return true; }
-            }
-        }
-
-        // check positive diag
-        for (int i = 0; i < width - 3; i++) {
-            for (int j = 0; j < height - 3; j++) {
-                if (currentBoard.getBoard()[i][j] == currentPlayer && currentBoard.getBoard()[i+1][j+1] == currentPlayer && currentBoard.getBoard()[i+2][j+2] == currentPlayer && currentBoard.getBoard()[i+3][j+3] == currentPlayer) { return true; }
-            }
-        }
-
-        // check negative diag
-        for (int i = 0; i < width - 3; i++) {
-            for (int j = 3; j < height; j++) {
-                if (currentBoard.getBoard()[i][j] == currentPlayer && currentBoard.getBoard()[i+1][j-1] == currentPlayer && currentBoard.getBoard()[i+2][j-2] == currentPlayer && currentBoard.getBoard()[i+3][j-3] == currentPlayer) { return true; }
-            }
-        }
-
-        return false;
-    }
-
-
-    // this function calls the previous function for each player and also checks if the board is full to know if the game is over
-    public boolean isGameOver(Counter[][] board) {
-        return checkWinningMove(this.currentBoard.getBoard(), this.currentPlayer) || checkWinningMove(this.currentBoard.getBoard(), this.currentPlayer.getOther()) || this.currentBoard.getValidPositions().isEmpty();
-    }
 }
