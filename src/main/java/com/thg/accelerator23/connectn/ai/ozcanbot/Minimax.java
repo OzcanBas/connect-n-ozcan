@@ -2,7 +2,6 @@ package com.thg.accelerator23.connectn.ai.ozcanbot;
 
 import com.thehutgroup.accelerator.connectn.player.Position;
 import com.thehutgroup.accelerator.connectn.player.Counter;
-import java.util.ArrayList;
 
 public class Minimax {
 

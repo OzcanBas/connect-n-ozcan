@@ -49,15 +49,11 @@ public class NewBoard {
         }
 
         // also add the new piece
-        copy[this.position.getX()][this.position.getY()] = counter;
+        if (position != null) {
+            copy[this.position.getX()][this.position.getY()] = counter;
+        }
 
         return copy;
-    }
-
-    // Check if a column is full or not, checks the top row of the column to see if there is a piece
-    public boolean columnFree(int column) {
-        int height = this.board[0].length; // Get the height of the board
-        return this.board[column][height - 1] == null; // Check if the top row is empty
     }
 
     public int getMinFreeY(int column, int height) {
